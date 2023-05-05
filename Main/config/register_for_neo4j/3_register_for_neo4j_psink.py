@@ -60,3 +60,10 @@ except:
 else:
     print("Success: PSink and VPoint Instance")
     
+#indexの付与
+def create_index(graph, object, property):
+    query = f"CREATE INDEX index_{object}_{property} IF NOT EXISTS FOR (n:{object}) ON (n.{property});"
+    graph.run(query)
+
+create_index(graph, "PSink", "Label")
+create_index(graph, "VPoint", "Label")

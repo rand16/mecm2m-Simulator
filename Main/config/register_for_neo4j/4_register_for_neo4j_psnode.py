@@ -88,6 +88,16 @@ except:
 else:
     print("Success: PSNode and VSNode Instance")
 
+#indexの付与
+def create_index(graph, object, property):
+    query = f"CREATE INDEX index_{object}_{property} IF NOT EXISTS FOR (n:{object}) ON (n.{property});"
+    graph.run(query)
+
+create_index(graph, "PSNode", "Label")
+create_index(graph, "VSNode", "Label")
+
+
+
 """
 for property in data["psnodes"]:
     for physical in property["psnode"]:
